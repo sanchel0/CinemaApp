@@ -1,0 +1,10 @@
+# === BACKEND (C#, .NET) ===
+*.exe
+*.dll
+*.log
+
+bin/
+obj/
+.vs/
+
+Document.docx
