@@ -20,6 +20,7 @@ namespace Infrastructure.Persistence.Configurations
                    .HasPrecision(18, 2);
             builder.Property(p => p.Stock).IsRequired();
             builder.Property(p => p.ImageUrl).IsRequired();
+            builder.Property(p => p.LastUpdate).IsRequired();
         }
     }
 }

@@ -20,12 +20,19 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.HasOne(t => t.Seat)
                    .WithMany()
-                   .HasForeignKey(t => t.SeatId);
+                   .HasForeignKey(t => t.SeatId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(t => t.Purchase)
                    .WithMany(p => p.Tickets)
                    .HasForeignKey(t => t.PurchaseId)
-                   .IsRequired(false);
+                   .IsRequired(false)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(t => t.Showtime)
+                   .WithMany(s => s.Tickets)
+                   .HasForeignKey(t => t.ShowtimeId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

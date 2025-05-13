@@ -24,6 +24,7 @@ namespace Infrastructure.Persistence.Configurations
             builder.HasMany(m => m.Actors).WithMany();
             builder.HasMany(m => m.Directors).WithMany();
             builder.HasMany(m => m.Genres).WithMany();
+            builder.Property(m => m.LastUpdate).IsRequired();
         }
     }
 }

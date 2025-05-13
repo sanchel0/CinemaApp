@@ -218,6 +218,12 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PosterUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -250,6 +256,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -425,7 +434,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Cinema", "Cinema")
                         .WithMany("Auditoriums")
                         .HasForeignKey("CinemaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Cinema");
@@ -435,7 +444,8 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Purchase", "Purchase")
                         .WithOne("FoodOrder")
-                        .HasForeignKey("Domain.FoodOrder", "PurchaseId");
+                        .HasForeignKey("Domain.FoodOrder", "PurchaseId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Purchase");
                 });
@@ -445,13 +455,13 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.FoodOrder", "FoodOrder")
                         .WithMany("Items")
                         .HasForeignKey("FoodOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("FoodOrder");
@@ -464,7 +474,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Auditorium", "Auditorium")
                         .WithMany("Seats")
                         .HasForeignKey("AuditoriumId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Auditorium");
@@ -475,13 +485,13 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Auditorium", "Auditorium")
                         .WithMany("Showtimes")
                         .HasForeignKey("AuditoriumId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Movie", "Movie")
                         .WithMany()
                         .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Auditorium");
@@ -493,18 +503,19 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Purchase", "Purchase")
                         .WithMany("Tickets")
-                        .HasForeignKey("PurchaseId");
+                        .HasForeignKey("PurchaseId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Seat", "Seat")
                         .WithMany()
                         .HasForeignKey("SeatId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Showtime", "Showtime")
                         .WithMany("Tickets")
                         .HasForeignKey("ShowtimeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Purchase");

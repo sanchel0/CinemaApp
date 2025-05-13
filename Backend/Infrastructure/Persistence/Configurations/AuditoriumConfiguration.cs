@@ -26,11 +26,12 @@ namespace Infrastructure.Persistence.Configurations
             builder.HasOne(a => a.Cinema)
                    .WithMany(c => c.Auditoriums)
                    .HasForeignKey(a => a.CinemaId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(a => a.Showtimes)
                    .WithOne(st => st.Auditorium)
-                   .HasForeignKey(st => st.AuditoriumId);
+                   .HasForeignKey(st => st.AuditoriumId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

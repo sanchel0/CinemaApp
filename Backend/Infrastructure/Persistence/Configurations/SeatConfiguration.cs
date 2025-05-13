@@ -26,7 +26,7 @@ namespace Infrastructure.Persistence.Configurations
             builder.HasOne(s => s.Auditorium)
                    .WithMany(a => a.Seats)
                    .HasForeignKey(s => s.AuditoriumId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

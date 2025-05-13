@@ -17,11 +17,13 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.HasOne(s => s.Movie)
                    .WithMany()
-                   .HasForeignKey(s => s.MovieId);
+                   .HasForeignKey(s => s.MovieId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(s => s.Tickets)
                    .WithOne(t => t.Showtime)
-                   .HasForeignKey(t => t.ShowtimeId);
+                   .HasForeignKey(t => t.ShowtimeId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

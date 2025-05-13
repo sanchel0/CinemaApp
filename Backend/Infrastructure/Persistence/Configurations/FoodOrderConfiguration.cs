@@ -18,7 +18,8 @@ namespace Infrastructure.Persistence.Configurations
             builder.HasOne(fo => fo.Purchase)
                    .WithOne(p => p.FoodOrder)
                    .HasForeignKey<FoodOrder>(fo => fo.PurchaseId)
-                   .IsRequired(false);
+                   .IsRequired(false)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

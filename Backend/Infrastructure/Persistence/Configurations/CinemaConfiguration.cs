@@ -18,7 +18,8 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.HasMany(c => c.Auditoriums)
                    .WithOne(a => a.Cinema)
-                   .HasForeignKey(a => a.CinemaId);
+                   .HasForeignKey(a => a.CinemaId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

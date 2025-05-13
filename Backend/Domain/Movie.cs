@@ -13,11 +13,13 @@ namespace Domain
         public string Description { get; set; } = null!;
         public int Duration { get; set; } // en minutos
         public DateTime ReleaseDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string Classification { get; set; } = null!; // ATP, +13, etc.
         public string PosterUrl { get; set; } = null!;
 
         public ICollection<Actor> Actors { get; set; } = new List<Actor>();
         public ICollection<Director> Directors { get; set; } = new List<Director>();
         public ICollection<Genre> Genres { get; set; } = new List<Genre>();
+        public DateTime LastUpdate { get; set; }
     }
 }

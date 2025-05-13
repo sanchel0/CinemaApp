@@ -21,11 +21,13 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.HasOne(foi => foi.FoodOrder)
                    .WithMany(fo => fo.Items)
-                   .HasForeignKey(foi => foi.FoodOrderId);
+                   .HasForeignKey(foi => foi.FoodOrderId)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(foi => foi.Product)
                    .WithMany()
-                   .HasForeignKey(foi => foi.ProductId);
+                   .HasForeignKey(foi => foi.ProductId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
