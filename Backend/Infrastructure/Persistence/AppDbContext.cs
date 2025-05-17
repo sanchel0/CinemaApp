@@ -16,7 +16,7 @@ namespace Infrastructure.Persistence
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<Director> Directos { get; set; }
+        public DbSet<Director> Directors { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<FoodOrderItem> FoodOrderItems { get; set; }
         public DbSet<FoodOrder> FoodOrders { get; set; }
