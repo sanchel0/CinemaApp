@@ -1,27 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {createActor} from '../../services/actors.js';
-import ActorLayout from '../../components/layouts/ActorLayout.jsx';
+import EntityLayout from '../../components/layouts/EntityLayout';
 
-function CreateActor() {
+function CreateEntity({ entityName, displayName, create }) {
     const [name, setName] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const newActor = await createActor({ name });
-            console.log(newActor.name);
-            console.log('Actor creado con ID:', newActor.id);
-            navigate('/actors');
+            const newEntity = await create({ name });
+            console.log(newEntity.name);
+            console.log(`${entityName[0].toUpperCase() + entityName.slice(1)} creado con ID:`, newEntity.id);
+            navigate(`/${entityName[0].toLowerCase() + entityName.slice(1)}`);
         } catch (error) {
-            alert('No se pudo crear el actor: ' + error);
+            alert(`No se pudo crear el ${entityName[0].toLowerCase() + entityName.slice(1)}: ` + error);
         }
     };
 
     return (
-        <ActorLayout>
-            <h2>Create Actor</h2>
+        <EntityLayout entityName={entityName}>
+            <h2>Create {displayName}</h2>
             <form onSubmit={handleSubmit}>
                 <label>Name:</label>
                 <input
@@ -32,8 +31,8 @@ function CreateActor() {
                 />
                 <button type="submit">Create</button>
             </form>
-        </ActorLayout>
+        </EntityLayout>
     );
 }
 
-export default CreateActor;
+export default CreateEntity;
