@@ -8,7 +8,7 @@ const movies = [
 export default function MoviesList() {
   return (
     <div>
-      <h2>Películas</h2>
+      <h2>Movies</h2>
       <ul>
         {movies.map(m => (
           <li key={m.id}>
@@ -16,6 +16,7 @@ export default function MoviesList() {
           </li>
         ))}
       </ul>
+      <Link to="/movies/create">Create Movie</Link>
     </div>
   );
 }
