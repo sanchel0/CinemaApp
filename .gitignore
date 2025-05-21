@@ -7,4 +7,6 @@ bin/
 obj/
 .vs/
 
+*.env
+
 Document.docx
