@@ -10,6 +10,7 @@ export default function Navbar() {
         </div>
       <NavLink to="/movies">Movies</NavLink>
       <NavLink to="/actors">Actors</NavLink>
+      <NavLink to="/directors">Directors</NavLink>
     </nav>
   );
 }
