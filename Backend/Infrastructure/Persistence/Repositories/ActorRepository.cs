@@ -23,6 +23,22 @@ namespace Infrastructure.Persistence.Repositories
         public async Task<Actor?> GetByIdAsync(int id)
             => await _context.Actors.FindAsync(id);
 
+        public async Task<List<Actor>> GetByIdsAsync(List<int> ids)
+        {
+            return await _context.Actors
+                .Where(a => ids.Contains(a.Id))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Actor>> GetByNameAsync(string name)
+        {
+            return await _context.Actors
+                .Where(a => a.Name.Contains(name))
+                .OrderBy(a => a.Name)
+                .Take(4)
+                .ToListAsync();
+        }
+
         public async Task<Actor> AddAsync(Actor actor)
         {
             _context.Actors.Add(actor);

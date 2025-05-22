@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.DTOs.Director;
 
 namespace Application.Services
 {
@@ -28,6 +29,12 @@ namespace Application.Services
         {
             var actor = await _repository.GetByIdAsync(id);
             return actor == null ? null : new ActorDto { Id = actor.Id, Name = actor.Name };
+        }
+
+        public async Task<IEnumerable<ActorDto>> GetByNameAsync(string name)
+        {
+            var actors = await _repository.GetByNameAsync(name);
+            return actors.Select(a => new ActorDto { Id = a.Id, Name = a.Name });
         }
 
         public async Task<ActorDto> CreateAsync(CreateActorDto dto)

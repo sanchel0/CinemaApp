@@ -10,6 +10,8 @@ namespace Domain.Repositories
     {
         Task<IEnumerable<Actor>> GetAllAsync();
         Task<Actor?> GetByIdAsync(int id);
+        Task<List<Actor>> GetByIdsAsync(List<int> ids);
+        Task<IEnumerable<Actor>> GetByNameAsync(string name);
         Task<Actor> AddAsync(Actor actor);
         Task<Actor> UpdateAsync(Actor actor);
         Task DeleteAsync(int id);

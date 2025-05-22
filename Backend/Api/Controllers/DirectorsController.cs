@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Director;
+using Application.DTOs.Genre;
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,13 @@ namespace Api.Controllers
         {
             var director = await _service.GetByIdAsync(id);
             return director == null ? NotFound() : Ok(director);
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<DirectorDto>>> GetByName([FromQuery] string name)
+        {
+            var directors = await _service.GetByNameAsync(name);
+            return Ok(directors);
         }
 
         [HttpPost]

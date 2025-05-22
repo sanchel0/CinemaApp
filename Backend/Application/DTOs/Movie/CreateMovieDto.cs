@@ -15,6 +15,7 @@ namespace Application.DTOs.Movie
         public DateTime EndDate { get; set; }
         public string Classification { get; set; } = null!;
         public string PosterUrl { get; set; } = null!;
+
         public List<int> ActorIds { get; set; } = new List<int>();
         public List<int> DirectorIds { get; set; } = new List<int>();
         public List<int> GenreIds { get; set; } = new List<int>();

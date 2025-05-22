@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Actor;
+using Application.DTOs.Director;
 using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,13 @@ namespace Api.Controllers
         {
             var actor = await _service.GetByIdAsync(id);
             return actor == null ? NotFound() : Ok(actor);
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ActorDto>>> GetByName([FromQuery] string name)
+        {
+            var actors = await _service.GetByNameAsync(name);
+            return Ok(actors);
         }
 
         [HttpPost]

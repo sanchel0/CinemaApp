@@ -30,6 +30,12 @@ namespace Application.Services
             return genre == null ? null : new GenreDto { Id = genre.Id, Name = genre.Name };
         }
 
+        public async Task<IEnumerable<GenreDto>> GetByNameAsync(string name)
+        {
+            var genres = await _repository.GetByNameAsync(name);
+            return genres.Select(g => new GenreDto { Id = g.Id, Name = g.Name });
+        }
+
         public async Task<GenreDto> CreateAsync(CreateGenreDto dto)
         {
             var genre = new Genre { Name = dto.Name };

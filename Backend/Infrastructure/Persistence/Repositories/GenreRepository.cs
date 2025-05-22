@@ -23,6 +23,22 @@ namespace Infrastructure.Persistence.Repositories
         public async Task<Genre?> GetByIdAsync(int id)
             => await _context.Genres.FindAsync(id);
 
+        public async Task<List<Genre>> GetByIdsAsync(List<int> ids)
+        {
+            return await _context.Genres
+                .Where(a => ids.Contains(a.Id))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Genre>> GetByNameAsync(string name)
+        {
+            return await _context.Genres
+                .Where(g => g.Name.Contains(name))
+                .OrderBy(g => g.Name)
+                .Take(4)
+                .ToListAsync();
+        }
+
         public async Task<Genre> AddAsync(Genre genre)
         {
             _context.Genres.Add(genre);

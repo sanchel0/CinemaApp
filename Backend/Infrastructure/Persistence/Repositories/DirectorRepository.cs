@@ -23,6 +23,22 @@ namespace Infrastructure.Persistence.Repositories
         public async Task<Director?> GetByIdAsync(int id)
             => await _context.Directors.FindAsync(id);
 
+        public async Task<List<Director>> GetByIdsAsync(List<int> ids)
+        {
+            return await _context.Directors
+                .Where(a => ids.Contains(a.Id))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Director>> GetByNameAsync(string name)
+        {
+            return await _context.Directors
+                .Where(d => d.Name.Contains(name))
+                .OrderBy(d => d.Name)
+                .Take(4)
+                .ToListAsync();
+        }
+
         public async Task<Director> AddAsync(Director director)
         {
             _context.Directors.Add(director);

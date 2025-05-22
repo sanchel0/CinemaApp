@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.Repositories
 {
-    internal class MovieRepository : IMovieRepository
+    public class MovieRepository : IMovieRepository
     {
         private readonly AppDbContext _context;
 
@@ -19,12 +19,20 @@ namespace Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Movie>> GetAllAsync()
         {
-            return await _context.Movies.ToListAsync();
+            return await _context.Movies
+                .Include(m => m.Actors)
+                .Include(m => m.Directors)
+                .Include(m => m.Genres)
+                .ToListAsync();
         }
 
         public async Task<Movie?> GetByIdAsync(int id)
         {
-            return await _context.Movies.FindAsync(id);
+            return await _context.Movies
+                .Include(m => m.Actors)
+                .Include(m => m.Directors)
+                .Include(m => m.Genres)
+                .FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task<Movie> AddAsync(Movie movie)

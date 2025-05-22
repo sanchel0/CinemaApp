@@ -1,4 +1,5 @@
 ﻿using Application.DTOs.Director;
+using Application.DTOs.Genre;
 using Domain;
 using Domain.Repositories;
 using System;
@@ -28,6 +29,12 @@ namespace Application.Services
         {
             var director = await _repository.GetByIdAsync(id);
             return director == null ? null : new DirectorDto { Id = director.Id, Name = director.Name };
+        }
+
+        public async Task<IEnumerable<DirectorDto>> GetByNameAsync(string name)
+        {
+            var directors = await _repository.GetByNameAsync(name);
+            return directors.Select(d => new DirectorDto { Id = d.Id, Name = d.Name });
         }
 
         public async Task<DirectorDto> CreateAsync(CreateDirectorDto dto)

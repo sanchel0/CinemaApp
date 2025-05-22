@@ -1,4 +1,5 @@
-﻿using Application.Services;
+﻿using Application.DTOs.Movie;
+using Application.Services;
 using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var movies = await _movieService.GetAllMoviesAsync();
+            var movies = await _movieService.GetAllAsync();
             return Ok(movies);
         }
 
@@ -28,7 +29,7 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var movie = await _movieService.GetMovieByIdAsync(id);
+            var movie = await _movieService.GetByIdAsync(id);
             if (movie == null)
                 return NotFound();
 
@@ -37,35 +38,49 @@ namespace Api.Controllers
 
         // POST: api/movies
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Movie movie)
+        public async Task<IActionResult> Create([FromBody] CreateMovieDto movie)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var created = await _movieService.CreateMovieAsync(movie);
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            try
+            {
+                await _movieService.CreateAsync(movie);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Error al crear la película", details = ex.Message });
+            }
         }
 
         // PUT: api/movies/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Movie movie)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateMovieDto movie)
         {
             if (id != movie.Id)
                 return BadRequest("El ID de la URL no coincide con el de la película.");
 
-            var updated = await _movieService.UpdateMovieAsync(movie);
-            return Ok(updated);
+            try
+            {
+                await _movieService.UpdateAsync(movie);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Error al actualizar la película", details = ex.Message });
+            }
         }
 
         // DELETE: api/movies/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var existing = await _movieService.GetMovieByIdAsync(id);
+            var existing = await _movieService.GetByIdAsync(id);
             if (existing == null)
                 return NotFound();
 
-            await _movieService.DeleteMovieAsync(id);
+            await _movieService.DeleteAsync(id);
             return NoContent();
         }
     }

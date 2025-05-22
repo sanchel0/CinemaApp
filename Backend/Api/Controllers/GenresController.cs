@@ -28,6 +28,13 @@ namespace Api.Controllers
             return genre == null ? NotFound() : Ok(genre);
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<GenreDto>>> GetByName([FromQuery] string name)
+        {
+            var genres = await _service.GetByNameAsync(name);
+            return Ok(genres);
+        }
+
         [HttpPost]
         public async Task<ActionResult<GenreDto>> Create([FromBody] CreateGenreDto dto)
         {
