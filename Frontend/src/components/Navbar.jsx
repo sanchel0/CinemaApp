@@ -11,6 +11,8 @@ export default function Navbar() {
       <NavLink to="/movies">Movies</NavLink>
       <NavLink to="/actors">Actors</NavLink>
       <NavLink to="/directors">Directors</NavLink>
+      <NavLink to="/genres">Genres</NavLink>
+      <NavLink to="/products">Products</NavLink>
     </nav>
   );
 }

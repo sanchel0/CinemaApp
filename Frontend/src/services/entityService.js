@@ -12,15 +12,23 @@ export function createEntityService(baseUrl) {
       return await response.json();
     },
 
+    async getByName(name) {
+      const response = await fetch(`${baseUrl}/search?name=${encodeURIComponent(name)}`);
+      if (!response.ok) throw new Error('Error al buscar por nombre');
+      return await response.json();
+    },
+
     async create({ name }) {
       const response = await fetch(baseUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name }),
       });
-
+      console.log('Creando con nombre:', name);
+      const created = await response.json();
+      console.log('Entidad creada:', created);
       if (!response.ok) throw new Error('Error al crear elemento');
-      return await response.json();
+      return await created;
     },
 
     async edit(id, { name }) {

@@ -4,8 +4,10 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import './App.css'
 import { MoviesRoutes } from './routes/MoviesRoutes';
+import { ActorsRoutes } from './routes/ActorsRoutes';
 import { DirectorsRoutes } from './routes/DirectorsRoutes';
-import { ActorsRoutes } from './routes/ActorsRouters';
+import { GenresRoutes } from './routes/GenresRoutes';
+import { ProductsRoutes } from './routes/ProductsRoutes';
 
 function App() {
 
@@ -16,8 +18,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           {MoviesRoutes()}
-          {DirectorsRoutes()}
           {ActorsRoutes()}
+          {DirectorsRoutes()}
+          {GenresRoutes()}
+          {ProductsRoutes()}
         </Routes>
       </main>
 

@@ -49,7 +49,7 @@ export default function EditEntity({entityName, displayName, getDetails, edit}) 
                     onChange={(e) => setName(e.target.value)}
                   />
                 
-                <button type="submit">Submit</button>
+                <button type="submit">Save</button>
               </form>
             </EntityLayout>
     )

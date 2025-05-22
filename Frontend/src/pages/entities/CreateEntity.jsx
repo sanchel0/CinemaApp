@@ -28,6 +28,7 @@ function CreateEntity({ entityName, displayName, create }) {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
+                    autoFocus
                 />
                 <button type="submit">Create</button>
             </form>

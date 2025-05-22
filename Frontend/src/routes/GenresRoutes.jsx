@@ -1,14 +1,18 @@
 import { Route } from 'react-router-dom';
-import MoviesList from '../pages/movies/MoviesList';
-import CreateMovie from '../pages/movies/CreateMovie';
-import EditMovie from '../pages/movies/EditMovie';
-import MovieDetails from '../pages/movies/MovieDetails';
+import EntityList from '../pages/entities/EntityList';
+import CreateEntity from '../pages/entities/CreateEntity';
+import EditEntity from '../pages/entities/EditEntity';
+import EntityDetails from '../pages/entities/EntityDetails';
+import {getAll, getDetails, create, edit, remove} from '../services/genres';
 
-export const MoviesRoutes = () => (
+const ENTITY_NAME = 'genres';
+const DISPLAY_NAME = 'Genre';
+
+export const GenresRoutes = () => (
   <>
-    <Route path="/movies" element={<MoviesList />} />
-    <Route path="/movies/create" element={<CreateMovie />} />
-    <Route path="/movies/:id/update" element={<EditMovie/>} />
-    <Route path="/movies/:id/details" element={<MovieDetails/>} />
+    <Route path="/genres" element={<EntityList entityName={ENTITY_NAME} displayName={DISPLAY_NAME} getAll={getAll} remove={remove} />} />
+    <Route path="/genres/create" element={<CreateEntity entityName={ENTITY_NAME} displayName={DISPLAY_NAME} create={create}/>} />
+    <Route path="/genres/:id/update" element={<EditEntity entityName={ENTITY_NAME} displayName={DISPLAY_NAME} getDetails={getDetails} edit={edit} />} />
+    <Route path="/genres/:id/details" element={<EntityDetails entityName={ENTITY_NAME} displayName={DISPLAY_NAME} getDetails={getDetails}/>} />
   </>
 );

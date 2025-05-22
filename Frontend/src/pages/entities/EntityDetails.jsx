@@ -26,7 +26,7 @@ export default function EntityDetails({ entityName, displayName, getDetails }) {
   return (
     <EntityLayout entityName={entityName}>
       <h2>{displayName} Details</h2>
-      <div className="actor-details">
+      <div className="entity-details">
           <div className="detail-item">
             <span className="label">ID:</span>
             <span className="value">{id}</span>

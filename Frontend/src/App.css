@@ -45,18 +45,6 @@ th, td {
   justify-content: space-between;
 }
 
-.update{
-  color: steelblue;
-}
-
-.delete{
-  color: red;
-}
-
-.details{
-  color: aquamarine;
-}
-
 nav a {
   border-radius: 6px;
   padding: 6px 12px;
@@ -90,10 +78,6 @@ nav a.active-link:hover {
   text-decoration: underline;
 }
 
-.delete {
-  color: red;
-}
-
 .entity-layout{
   width: 100%;
   max-width: 500px;
@@ -108,7 +92,7 @@ nav a.active-link:hover {
   margin-bottom: 1rem;
 }
 
-.entity-layout h2{
+.entity-layout h2, h3, h4{
   margin: 0.5rem 0;
   color: #333;
 }
@@ -119,8 +103,13 @@ nav a.active-link:hover {
   gap: 1rem;
 }
 
-.entity-layout label {
-  font-weight: bold;
+.entity-layout form > div,  .entity-layout form > section{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.entity-layout label, p, strong, li {
   margin-bottom: 0;
   color: #333;
 }
@@ -149,7 +138,7 @@ nav a.active-link:hover {
   margin: 0.5rem 0;
 }
 
-.actor-details {
+.entity-details {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -172,8 +161,14 @@ nav a.active-link:hover {
 
 /*CreateMovie*/
 
-input{
-  background-color: rebeccapurple;
+input, textarea, select{
+  background-color: whitesmoke;
+  border: darkgray 2px solid;
+  color: #666;
+}
+
+input:focus{
+  border-color: transparent;
 }
 
 .container{
@@ -193,19 +188,14 @@ input{
   gap: 0.2rem;
   text-align: center;
   margin: 0;
-  
   overflow-y: auto;
 
   width: 100%;
-  border-radius: 2px;
+  border-radius: 4px;
   max-height: 100px; 
   
   scrollbar-color: darkgrey #f1f1f1;
-
-  background-color: #f1f1f1;
-
   opacity: 1;
-
 }
 
 @keyframes slide-up {
@@ -235,8 +225,8 @@ input{
   list-style: none;
   padding: 5px;
   cursor: pointer;
-  border-radius: 8px;
   padding: 0.2rem;
+  border-radius: 4px;
 }
 
 .item.added {
@@ -249,13 +239,11 @@ input{
 }
 
 .items-title{
-  color: black;
   margin: 0;
-  font-weight: bold;
 }
 
 .active{
-  background-color: #007bff;
+  background-color: #41adff;
   color: whitesmoke;
   font-weight: bold;
 }
@@ -264,20 +252,32 @@ input{
  background-color: rgb(232, 232, 232);
 }
 
-.actor-layout form > div{
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.add{
+.container .add{
   margin-right: 0.5rem;
+  background-color: #41adff;
 }
 
-.actor-layout .remove{
+.entity-layout .remove{
   background-color: salmon;
 }
-.actor-layout .activeBtn{
+.entity-layout .remove:hover{
+  background-color: sienna;
+}
+.entity-layout .activeBtn{
   background-color: red;
 }
+.entity-layout .activeBtn:hover{
+  background-color: darkred;
+}
 
+.update{
+  color: steelblue;
+}
+
+.delete{
+  color: red;
+}
+
+.details{
+  color: aquamarine;
+}
