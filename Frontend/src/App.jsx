@@ -8,6 +8,7 @@ import { ActorsRoutes } from './routes/ActorsRoutes';
 import { DirectorsRoutes } from './routes/DirectorsRoutes';
 import { GenresRoutes } from './routes/GenresRoutes';
 import { ProductsRoutes } from './routes/ProductsRoutes';
+import { CinemasRoutes } from './routes/CinemasRoutes';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           {DirectorsRoutes()}
           {GenresRoutes()}
           {ProductsRoutes()}
+          {CinemasRoutes()}
         </Routes>
       </main>
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.DTOs.Auditorium;
 
 namespace Application.Services
 {
@@ -103,7 +104,15 @@ namespace Application.Services
                 Email = cinema.Email,
                 OpeningTime = cinema.OpeningTime,
                 ClosingTime = cinema.ClosingTime,
-                IsActive = cinema.IsActive
+                IsActive = cinema.IsActive,
+                Auditoriums = cinema.Auditoriums != null && cinema.Auditoriums.Any()
+                    ? cinema.Auditoriums.Select(a => new AuditoriumDto
+                    {
+                        Id = a.Id,
+                        Name = a.Name,
+                        Capacity = a.Capacity
+                    }).ToList()
+                    : new List<AuditoriumDto>()
             };
         }
     }

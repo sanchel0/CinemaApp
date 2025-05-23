@@ -13,6 +13,7 @@ export default function Navbar() {
       <NavLink to="/directors">Directors</NavLink>
       <NavLink to="/genres">Genres</NavLink>
       <NavLink to="/products">Products</NavLink>
+      <NavLink to="/cinemas">Cinemas</NavLink>
     </nav>
   );
 }
