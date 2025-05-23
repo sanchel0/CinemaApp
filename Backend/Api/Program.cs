@@ -26,6 +26,9 @@ builder.Services.AddScoped<MovieService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ProductService>();
 
+builder.Services.AddScoped<ICinemaRepository, CinemaRepository>();
+builder.Services.AddScoped<CinemaService>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
