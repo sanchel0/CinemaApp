@@ -281,3 +281,142 @@ input:focus{
 .details{
   color: aquamarine;
 }
+
+/*Auditorium*/
+.form-auditorium{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form-auditorium .buttons-grid{
+  flex-direction: row;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.grid{
+  border-radius: 8px;
+  overflow: hidden;
+}
+.grid-seats-wrapper{
+  position: relative;
+  z-index: 100;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 49;
+}
+.grid-seats{
+  padding: 1rem;
+  background-color: brown;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  overflow: auto;
+  scrollbar-color: darkgray whitesmoke;
+  max-height: 200px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 4px;
+}
+
+.grid-seats.expanded {
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  width: 90%;
+  height: 80%;
+  max-height: none;
+  max-width: none;
+  background-color: brown;
+  overflow: auto;
+  z-index: 50;
+}
+
+.seat-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: auto;
+}
+
+.grid-seats-wrapper .close-button {
+  position: fixed;
+  top: 4.2%;
+  right: 1.2%;
+  z-index: 100;
+  background: red;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.expanded .close-button:hover {
+  background: darkred;
+}
+.row{
+  height: 2rem;
+  display: flex;
+
+  gap: 1rem; 
+  /*padding-right: 1rem;*/
+}
+/*.row::after {
+  content: "";
+  display: block;
+  min-width: 0.1px;
+}*/
+.row .seat{
+  padding: 0;
+  flex: 0 0 auto;
+  height: 2rem;
+  width: 3rem;
+  background-color: darkgray;
+  color: white;
+  text-align: center;
+}
+
+.row .seat:hover{
+  background-color: gray;
+}
+
+.row .seat:focus {
+  outline: 0.1rem solid gray;
+  outline-offset: 0px;
+  box-shadow: 0 0 8px 4px gray;
+}
+
+.row .selected{
+  background-color: green;
+}
+
+.row .selected:hover{
+  background-color: darkgreen;
+}
+.row .selected:focus {
+  outline: 0.1rem solid darkgreen;
+  outline-offset: 0px;
+  box-shadow: 0 0 8px 4px darkgreen;
+}
+
+.details .grid{
+  margin-top: 0.5rem;
+}
+
+.seats-display .seat {
+  border-radius: 4px;
+  text-align: center;
+  height: auto;
+  background-color: green;
+}
+
+.seats-display .seat:hover {
+  background-color: darkgreen;
+}

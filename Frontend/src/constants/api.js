@@ -8,6 +8,7 @@ export const API_URL_GENRES = `${API_BASE_URL}/genres`;
 export const API_URL_MOVIES = `${API_BASE_URL}/movies`;
 
 export const API_URL_CINEMAS = `${API_BASE_URL}/cinemas`;
+export const API_URL_AUDITORIUMS = `${API_BASE_URL}/auditoriums`;
 
 export const API_URL_PRODUCTS = `${API_BASE_URL}/products`;
 
