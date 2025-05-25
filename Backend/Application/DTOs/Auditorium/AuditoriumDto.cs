@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.DTOs.Seat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,6 @@ namespace Application.DTOs.Auditorium
 
         public int CinemaId { get; set; }
         public string? CinemaName { get; set; }
-
-        // Si querés incluir info de asientos y funciones (opcional)
-        // public List<SeatDto> Seats { get; set; } = new();
-        // public List<ShowtimeDto> Showtimes { get; set; } = new();
+        public List<SeatDto> Seats { get; set; } = new();
     }
 }

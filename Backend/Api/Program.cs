@@ -29,6 +29,11 @@ builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ICinemaRepository, CinemaRepository>();
 builder.Services.AddScoped<CinemaService>();
 
+builder.Services.AddScoped<IAuditoriumRepository, AuditoriumRepository>();
+builder.Services.AddScoped<AuditoriumService>();
+
+builder.Services.AddScoped<ISeatRepository, SeatRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>

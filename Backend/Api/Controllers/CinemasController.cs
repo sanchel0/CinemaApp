@@ -39,6 +39,8 @@ namespace Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] CinemaDto dto)
         {
+            if (id != dto.Id) return BadRequest("ID mismatch"); 
+            
             var updated = await _service.UpdateAsync(id, dto);
             return updated == null ? NotFound() : Ok(updated);
         }

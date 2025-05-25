@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.DTOs.Seat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace Application.DTOs.Auditorium
         public string Name { get; set; } = null!;
         public int Capacity { get; set; }
         public int CinemaId { get; set; }
+        public List<CreateSeatDto> Seats { get; set; } = new();
     }
 }
