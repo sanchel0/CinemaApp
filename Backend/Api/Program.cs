@@ -34,6 +34,9 @@ builder.Services.AddScoped<AuditoriumService>();
 
 builder.Services.AddScoped<ISeatRepository, SeatRepository>();
 
+builder.Services.AddScoped<IShowtimeRepository, ShowtimeRepository>();
+builder.Services.AddScoped<ShowtimeService>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
