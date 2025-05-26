@@ -37,6 +37,7 @@ export default function CinemaDetails() {
         <p><strong>Address:</strong> {cinema.address}</p>
         <p><strong>Location:</strong> {cinema.location}</p>
         <p><strong>Postal Code:</strong> {cinema.postalCode}</p>
+        <p><strong>Time Zone:</strong> {cinema.timeZone}</p>
         <p><strong>Phone Number:</strong> {cinema.phoneNumber}</p>
         <p><strong>Email:</strong> {cinema.email}</p>
         <p><strong>Opening Time:</strong> {cinema.openingTime}</p>

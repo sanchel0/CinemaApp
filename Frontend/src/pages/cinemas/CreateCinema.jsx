@@ -27,6 +27,7 @@ function CreateCinema() {
             location: form.location.value,
             address: form.address.value,
             postalCode: form.postalCode.value,
+            timeZone: form.timeZone,
             phoneNumber: form.phoneNumber.value,
             email: form.email.value,
             openingTime: form.openingTime.value + ':00',
@@ -72,6 +73,9 @@ function CreateCinema() {
 
         <label>Postal Code:</label>
         <input name="postalCode" type="text" required />
+
+        <label>Time Zone:</label>
+        <input name="timeZone" type="text" required />
 
         <label>Phone Number:</label>
         <input name="phoneNumber" type="text" required />

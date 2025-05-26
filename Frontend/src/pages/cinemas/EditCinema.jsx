@@ -44,6 +44,7 @@ function EditCinema() {
             location: form.location.value,
             address: form.address.value,
             postalCode: form.postalCode.value,
+            timeZone: form.timeZone,
             phoneNumber: form.phoneNumber.value,
             email: form.email.value,
             openingTime: form.openingTime.value + ':00',
@@ -91,6 +92,9 @@ function EditCinema() {
 
         <label>Postal Code:</label>
         <input name="postalCode" type="text" defaultValue={cinemaData.postalCode} required />
+
+        <label>Time Zone:</label>
+        <input name="timeZone" type="text" defaultValue={cinemaData.timeZone} required />
 
         <label>Phone Number:</label>
         <input name="phoneNumber" type="text" defaultValue={cinemaData.phoneNumber} required />

@@ -17,7 +17,7 @@ namespace Application.DTOs.Cinema
         public string Location { get; set; } = null!;
         public string Address { get; set; } = null!;
         public string PostalCode { get; set; } = null!;
-        public string Timezone { get; set; } = null!;
+        public string TimeZone { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string Email { get; set; } = null!;
         public TimeSpan OpeningTime { get; set; }
