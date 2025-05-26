@@ -10,6 +10,7 @@ import { GenresRoutes } from './routes/GenresRoutes';
 import { ProductsRoutes } from './routes/ProductsRoutes';
 import { CinemasRoutes } from './routes/CinemasRoutes';
 import { AuditoriumsRoutes } from './routes/AuditoriumsRoutes';
+import { ShowtimesRoutes } from './routes/ShowtimesRoutes';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           {ProductsRoutes()}
           {CinemasRoutes()}
           {AuditoriumsRoutes()}
+          {ShowtimesRoutes()}
         </Routes>
       </main>
 
