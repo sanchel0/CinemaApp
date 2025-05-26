@@ -50,6 +50,7 @@ namespace Application.Services
                 Location = dto.Location,
                 Address = dto.Address,
                 PostalCode = dto.PostalCode,
+                Timezone = dto.Timezone,
                 PhoneNumber = dto.PhoneNumber,
                 Email = dto.Email,
                 OpeningTime = dto.OpeningTime,
@@ -73,6 +74,7 @@ namespace Application.Services
             cinema.Location = dto.Location;
             cinema.Address = dto.Address;
             cinema.PostalCode = dto.PostalCode;
+            cinema.Timezone = dto.Timezone;
             cinema.PhoneNumber = dto.PhoneNumber;
             cinema.Email = dto.Email;
             cinema.OpeningTime = dto.OpeningTime;
@@ -100,6 +102,7 @@ namespace Application.Services
                 Location = cinema.Location,
                 Address = cinema.Address,
                 PostalCode = cinema.PostalCode,
+                Timezone = cinema.Timezone,
                 PhoneNumber = cinema.PhoneNumber,
                 Email = cinema.Email,
                 OpeningTime = cinema.OpeningTime,
