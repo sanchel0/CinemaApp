@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Locations;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,6 @@ namespace Infrastructure.Persistence
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options) { }
 
-        // DbSets opcionales, pero útiles para facilitar pruebas y consultas
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -26,6 +26,9 @@ namespace Infrastructure.Persistence
         public DbSet<Showtime> Showtimes { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

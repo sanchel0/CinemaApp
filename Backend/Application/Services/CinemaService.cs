@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.DTOs.Auditorium;
+using Application.DTOs.Location;
 
 namespace Application.Services
 {
@@ -26,9 +27,7 @@ namespace Application.Services
             {
                 Id = c.Id,
                 Name = c.Name,
-                Country = c.Country,
-                City = c.City,
-                State = c.State,
+                City = new CityDto { Id = c.City.Id, Name = c.City.Name, StateId = c.City.StateId },
                 IsActive = c.IsActive
             });
         }
@@ -44,15 +43,10 @@ namespace Application.Services
             var cinema = new Cinema
             {
                 Name = dto.Name,
-                Country = dto.Country,
-                City = dto.City,
-                State = dto.State,
+                CityId = dto.City.Id,
                 Location = dto.Location,
                 Address = dto.Address,
                 PostalCode = dto.PostalCode,
-                TimeZone = dto.TimeZone,
-                PhoneNumber = dto.PhoneNumber,
-                Email = dto.Email,
                 OpeningTime = dto.OpeningTime,
                 ClosingTime = dto.ClosingTime,
                 IsActive = dto.IsActive
@@ -68,15 +62,10 @@ namespace Application.Services
             if (cinema == null) return null;
 
             cinema.Name = dto.Name;
-            cinema.Country = dto.Country;
-            cinema.City = dto.City;
-            cinema.State = dto.State;
+            cinema.CityId = dto.City.Id;
             cinema.Location = dto.Location;
             cinema.Address = dto.Address;
             cinema.PostalCode = dto.PostalCode;
-            cinema.TimeZone = dto.TimeZone;
-            cinema.PhoneNumber = dto.PhoneNumber;
-            cinema.Email = dto.Email;
             cinema.OpeningTime = dto.OpeningTime;
             cinema.ClosingTime = dto.ClosingTime;
             cinema.IsActive = dto.IsActive;
@@ -96,15 +85,10 @@ namespace Application.Services
             {
                 Id = cinema.Id,
                 Name = cinema.Name,
-                Country = cinema.Country,
-                City = cinema.City,
-                State = cinema.State,
+                City = new CityDto { Id = cinema.City.Id, Name = cinema.City.Name, StateId = cinema.City.StateId },
                 Location = cinema.Location,
                 Address = cinema.Address,
                 PostalCode = cinema.PostalCode,
-                TimeZone = cinema.TimeZone,
-                PhoneNumber = cinema.PhoneNumber,
-                Email = cinema.Email,
                 OpeningTime = cinema.OpeningTime,
                 ClosingTime = cinema.ClosingTime,
                 IsActive = cinema.IsActive,

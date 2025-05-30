@@ -13,8 +13,39 @@ namespace Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Cinema> builder)
         {
             builder.HasKey(c => c.Id);
-            builder.Property(c => c.Name).IsRequired();
-            builder.Property(c => c.Address).IsRequired();
+            builder.Property(c => c.Name)
+                .IsRequired()
+                .HasMaxLength(150);
+
+            builder.Property(c => c.Name)
+               .IsRequired()
+               .HasMaxLength(200);
+
+            builder.Property(c => c.Location)
+               .IsRequired()
+               .HasMaxLength(100);
+
+            builder.Property(c => c.Address)
+                .IsRequired()
+                .HasMaxLength(250);
+
+            builder.Property(c => c.PostalCode)
+              .IsRequired()
+              .HasMaxLength(20);
+
+            builder.Property(c => c.OpeningTime)
+                   .IsRequired();
+
+            builder.Property(c => c.ClosingTime)
+                   .IsRequired();
+
+            builder.Property(c => c.IsActive)
+                   .IsRequired();
+
+            builder.HasOne(c => c.City)
+                .WithMany(city => city.Cinemas)
+                .HasForeignKey(c => c.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(c => c.Auditoriums)
                    .WithOne(a => a.Cinema)
