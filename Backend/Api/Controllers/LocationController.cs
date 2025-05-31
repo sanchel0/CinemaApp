@@ -59,6 +59,13 @@ namespace Api.Controllers
             return Ok(await _service.GetAllStatesAsync());
         }
 
+        [HttpGet("countries/{countryId}/states")]
+        public async Task<ActionResult<IEnumerable<StateDto>>> GetStatesByCountryId(int countryId)
+        {
+            var states = await _service.GetStatesByCountryIdAsync(countryId);
+            return Ok(states);
+        }
+
         [HttpGet("states/{id}")]
         public async Task<ActionResult<StateDto>> GetState(int id)
         {

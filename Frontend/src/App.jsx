@@ -11,6 +11,7 @@ import { ProductsRoutes } from './routes/ProductsRoutes';
 import { CinemasRoutes } from './routes/CinemasRoutes';
 import { AuditoriumsRoutes } from './routes/AuditoriumsRoutes';
 import { ShowtimesRoutes } from './routes/ShowtimesRoutes';
+import CountriesList from './pages/locations/CountriesList';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           {CinemasRoutes()}
           {AuditoriumsRoutes()}
           {ShowtimesRoutes()}
+          <Route path="/locations" element={<CountriesList />} />
         </Routes>
       </main>
 

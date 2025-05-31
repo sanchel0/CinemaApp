@@ -60,6 +60,13 @@ namespace Infrastructure.Persistence.Repositories
             return await _context.States.ToListAsync();
         }
 
+        public async Task<IEnumerable<State>> GetStatesByCountryIdAsync(int countryId)
+        {
+            return await _context.States
+                .Where(s => s.CountryId == countryId)
+                .ToListAsync();
+        }
+
         public async Task<State?> GetStateByIdAsync(int id)
         {
             return await _context.States.FindAsync(id);

@@ -19,6 +19,7 @@ namespace Domain.Repositories
 
         #region States
         Task<IEnumerable<State>> GetAllStatesAsync();
+        Task<IEnumerable<State>> GetStatesByCountryIdAsync(int countryId);
         Task<State?> GetStateByIdAsync(int id);
         Task<State> AddStateAsync(State state);
         Task<State> UpdateStateAsync(State state);

@@ -23,20 +23,20 @@ namespace Application.Services
         public async Task<IEnumerable<CountryDto>> GetAllCountriesAsync()
         {
             var countries = await _repository.GetAllCountriesAsync();
-            return countries.Select(c => new CountryDto { Id = c.Id, Name = c.Name });
+            return countries.Select(c => new CountryDto { Id = c.Id, Name = c.Name, IsoCode = c.IsoCode, Email = c.Email, PhoneNumber = c.PhoneNumber });
         }
 
         public async Task<CountryDto?> GetCountryByIdAsync(int id)
         {
-            var country = await _repository.GetCountryByIdAsync(id);
-            return country == null ? null : new CountryDto { Id = country.Id, Name = country.Name };
+            var c = await _repository.GetCountryByIdAsync(id);
+            return c == null ? null : new CountryDto { Id = c.Id, Name = c.Name, IsoCode = c.IsoCode, Email = c.Email, PhoneNumber = c.PhoneNumber };
         }
 
         public async Task<CountryDto> CreateCountryAsync(CountryDto dto)
         {
-            var country = new Country { Name = dto.Name };
+            var country = new Country { Name = dto.Name, IsoCode = dto.IsoCode, Email = dto.Email, PhoneNumber = dto.PhoneNumber };
             var result = await _repository.AddCountryAsync(country);
-            return new CountryDto { Id = result.Id, Name = result.Name };
+            return new CountryDto { Id = result.Id, Name = result.Name, IsoCode = result.IsoCode, Email = result.Email, PhoneNumber = result.PhoneNumber };
         }
 
         public async Task<CountryDto?> UpdateCountryAsync(CountryDto dto)
@@ -45,8 +45,11 @@ namespace Application.Services
             if (existing == null) return null;
 
             existing.Name = dto.Name;
+            existing.IsoCode = dto.IsoCode;
+            existing.Email = dto.Email;
+            existing.PhoneNumber = dto.PhoneNumber;
             var result = await _repository.UpdateCountryAsync(existing);
-            return new CountryDto { Id = result.Id, Name = result.Name };
+            return new CountryDto { Id = result.Id, Name = result.Name, IsoCode = result.IsoCode, Email = result.Email, PhoneNumber = result.PhoneNumber };
         }
 
         public async Task<bool> DeleteCountryAsync(int id)
@@ -64,6 +67,17 @@ namespace Application.Services
         {
             var states = await _repository.GetAllStatesAsync();
             return states.Select(s => new StateDto { Id = s.Id, Name = s.Name, CountryId = s.CountryId });
+        }
+
+        public async Task<IEnumerable<StateDto>> GetStatesByCountryIdAsync(int countryId)
+        {
+            var states = await _repository.GetStatesByCountryIdAsync(countryId);
+            return states.Select(s => new StateDto
+            {
+                Id = s.Id,
+                Name = s.Name,
+                CountryId = s.CountryId
+            });
         }
 
         public async Task<StateDto?> GetStateByIdAsync(int id)

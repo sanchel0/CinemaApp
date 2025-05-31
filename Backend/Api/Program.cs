@@ -37,6 +37,9 @@ builder.Services.AddScoped<ISeatRepository, SeatRepository>();
 builder.Services.AddScoped<IShowtimeRepository, ShowtimeRepository>();
 builder.Services.AddScoped<ShowtimeService>();
 
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<LocationService>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>

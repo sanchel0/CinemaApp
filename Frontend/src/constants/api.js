@@ -11,6 +11,12 @@ export const API_URL_CINEMAS = `${API_BASE_URL}/cinemas`;
 export const API_URL_AUDITORIUMS = `${API_BASE_URL}/auditoriums`;
 export const API_URL_SHOWTIMES = `${API_BASE_URL}/showtimes`;
 
+export const LOCATION_BASE_URL_ = `${API_BASE_URL}/location`;
+
+export const API_URL_COUNTRIES = `${LOCATION_BASE_URL_}/countries`;
+export const API_URL_STATES = `${LOCATION_BASE_URL_}/states`;
+export const API_URL_CITIES = `${LOCATION_BASE_URL_}/cities`;
+
 export const API_URL_PRODUCTS = `${API_BASE_URL}/products`;
 
 export const API_URL_IMAGES = `${API_BASE_URL}/images`;
