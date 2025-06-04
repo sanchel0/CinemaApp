@@ -103,6 +103,13 @@ namespace Api.Controllers
             return Ok(await _service.GetAllCitiesAsync());
         }
 
+        [HttpGet("states/{stateId}/cities")]
+        public async Task<ActionResult<IEnumerable<CityDto>>> GetCitiesByStateId(int stateId)
+        {
+            var cities = await _service.GetCitiesByStateIdAsync(stateId);
+            return Ok(cities);
+        }
+
         [HttpGet("cities/{id}")]
         public async Task<ActionResult<CityDto>> GetCity(int id)
         {

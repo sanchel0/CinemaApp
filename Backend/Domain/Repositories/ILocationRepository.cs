@@ -28,6 +28,7 @@ namespace Domain.Repositories
 
         #region Cities
         Task<IEnumerable<City>> GetAllCitiesAsync();
+        Task<IEnumerable<City>> GetCitiesByStateIdAsync(int stateId);
         Task<City?> GetCityByIdAsync(int id);
         Task<City> AddCityAsync(City city);
         Task<City> UpdateCityAsync(City city);

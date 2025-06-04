@@ -5,13 +5,15 @@ const useEntityModal = () => {
     show: false,
     entity: null,
     initialValues: {},
+    callback: null,
   });
 
-  const openModal = useCallback((entity, initialValues = {}) => {
+  const openModal = useCallback((entity, initialValues = {}, callback = null) => {
     setModalData({
       show: true,
       entity,
       initialValues,
+      callback,
     });
   }, []);
 

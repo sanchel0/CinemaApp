@@ -25,7 +25,10 @@ export default function CountryModal ({ show, onClose, onSubmit, initialValues =
       if (data.phoneNumber && !data.phoneNumber.startsWith('+')) {
         data.phoneNumber = '+' + data.phoneNumber;
       }
-    onSubmit(data);
+      if (initialValues.id) {
+        data.id = initialValues.id;
+      }
+      onSubmit(data);
     }
     else {
         alert('Todos los campos son obligatorios');
@@ -43,7 +46,7 @@ export default function CountryModal ({ show, onClose, onSubmit, initialValues =
           <input type="text" name="name" placeholder="Name" defaultValue={initialValues?.name || ''} required />
           <input type="text" name="isoCode" placeholder="ISO Code" defaultValue={initialValues?.isoCode || ''} required />
           <input type="email" name="email" placeholder="Email" defaultValue={initialValues?.email || ''} />
-          <input type="text" pattern="[0-9]*" name="phoneNumber" placeholder="Enter phone number with country code (e.g. +52)" defaultValue={initialValues?.phoneNumber || ''} />
+          <input type="text" pattern="^\+?[0-9]+$" inputMode="numeric" name="phoneNumber" placeholder="Enter phone number with country code (e.g. +52)" defaultValue={initialValues?.phoneNumber || ''} />
         </Modal.Body>
         <Modal.Footer>
           <button type="button" onClick={onClose}>Cancel</button>

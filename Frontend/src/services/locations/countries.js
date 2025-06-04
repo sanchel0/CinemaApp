@@ -48,7 +48,13 @@ export async function updateCountry(id, data) {
 export async function deleteCountry(id) {
   const res = await fetch(`${API_URL_COUNTRIES}/${id}`, {
     method: 'DELETE',
+    headers,
   });
+
   if (!res.ok) throw new Error('Error al eliminar país');
-  return true;
+  if (res.status !== 204) {
+    return await res.json();
+  }
+
+  return null;
 }

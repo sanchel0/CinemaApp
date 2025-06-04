@@ -1,9 +1,9 @@
 import CountryModal from './CountryModal';
 import StateModal from './StateModal';
-//import CityModal from './CityModal';
+import CityModal from './CityModal';
 
 const EntityModalRenderer = ({ modalData, onClose, onSubmit }) => {
-  const { show, entity, initialValues } = modalData;
+  const { show, entity, initialValues, callback } = modalData;
 
   if (!show) return null;
 
@@ -12,8 +12,16 @@ const EntityModalRenderer = ({ modalData, onClose, onSubmit }) => {
     onClose,
     initialValues,
     onSubmit: (data) => {
-      onSubmit(entity, data);
-      onClose();
+      onSubmit(entity, data)
+        .then(() => {
+          if (typeof callback === 'function') {
+            callback(); // Solo si no falló
+          }
+          onClose();
+        })
+        .catch(() => {
+          // No cerrar modal, ni hacer refresh si hubo error
+        });
     }
   };
 
@@ -22,8 +30,8 @@ const EntityModalRenderer = ({ modalData, onClose, onSubmit }) => {
       return <CountryModal {...sharedProps} />;
     case 'state':
       return <StateModal {...sharedProps} />;
-    /*case 'city':
-      return <CityModal {...sharedProps} />;*/
+    case 'city':
+      return <CityModal {...sharedProps} />;
     default:
       return null;
   }

@@ -1,43 +1,47 @@
-import { useState, useEffect, useRef } from 'react';
 import useEntityModal from '../../hooks/useEntityModal';
 import EntityModalRenderer from '../../components/modal/EntityModalRenderer';
-import { createOrUpdate, getCountries } from '../../services/locations/countries';
-import { createState } from '../../services/locations/states';
+import { createOrUpdate as createOrUpdateCountry, getCountries, deleteCountry } from '../../services/locations/countries';
+import { createOrUpdate as createOrUpdateState } from '../../services/locations/states';
+import { createOrUpdate as createOrUpdateCity } from '../../services/locations/cities';
 import StatesList from './StatesList';
+import useEntityList from '../../hooks/useEntityList';
 
 const CountriesList = () => {
-    const { modalData, openModal, closeModal } = useEntityModal();
-    
-    const [countries, setCountries] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState(null);
-
-    useEffect(() => {
-      getCountries()
-        .then(setCountries)
-        .catch(console.error);
-    },[]);
-
-    const handleViewStates = (countryId) => {
-      setSelectedCountry(countryId);
-    };
+    const { items: countries, selected: selectedCountry, setSelected: setSelectedCountry, refresh: handleRefresh, handleDelete } = useEntityList({
+    fetchList: getCountries,
+    deleteItem: deleteCountry,
+  });
+  
+  const { modalData, openModal, closeModal } = useEntityModal();
 
     const handleSubmit = (entity, data) => {
       console.log(`Saving ${entity}`, data);
-      switch(entity) {
-        case 'country':
-          createOrUpdate(data).then((data) => alert('Item: '+ data)).catch();
-          break;
-        case 'state':
-          createState(data).then().catch();
-          break;
-        // otros
-      }
+      
+      const handlers = {
+        country: createOrUpdateCountry,
+        state: createOrUpdateState,
+        city: createOrUpdateCity
+      };
+      const action = handlers[entity];
+
+      if (!action) return;
+
+      return action(data)
+        .then((savedItem) => {
+          console.log(`${entity} saved`, savedItem);
+          return savedItem; // devolvemos el dato para que lo use el modal si quiere
+        })
+        .catch((err) => {
+          console.error(`Error saving ${entity}`, err);
+          alert(`Error saving ${entity}: ${err.message}`);
+          throw err; // lo volvemos a lanzar si querés capturarlo en otro lado
+        });
     };
 
     return(
       <>
-        <h1>Demo Modal</h1>
-        
+        <h1>Locations</h1>
+        <h2>Countries</h2>
         <table>
         <thead>
           <tr>
@@ -56,15 +60,16 @@ const CountriesList = () => {
               <td>{c.email}</td>
               <td>{c.phoneNumber}</td>
               <td>
-                <button onClick={() => openModal('country', {...c})}>Edit</button>
-                <button onClick={() => handleViewStates(c)}>View States</button>
+                <button onClick={() => openModal('country', {...c}, handleRefresh)}>Edit</button>
+                 <button onClick={() => handleDelete(c)}>Delete</button>
+                <button onClick={() => setSelectedCountry(c)}>View States</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       
-      <button onClick={() => openModal('country')}>Create Country</button>
+      <button onClick={() => openModal('country', {}, handleRefresh)}>Create Country</button>
       
 
       {selectedCountry && (
@@ -78,7 +83,6 @@ const CountriesList = () => {
           modalData={modalData}
           onClose={closeModal}
           onSubmit={handleSubmit}
-          countries={[{ id: 1, name: 'USA' }, { id: 2, name: 'Canada' }]}
         />
         
 

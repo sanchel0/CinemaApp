@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Modal from './Modal'
-import { getCountries } from '../../services/locations/countries';
+import { getStates } from '../../services/locations/states';
 
-export default function StateModal ({ show, onClose, onSubmit, initialValues = {}}) {
+export default function CityModal ({ show, onClose, onSubmit, initialValues = {}}) {
   const formRef = useRef(null);
-  const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(initialValues.countryId || '');
+  const [states, setStates] = useState([]);
+  const [selectedState, setSelectedState] = useState(initialValues.stateId || '');
   const isEdit = initialValues && initialValues.id != null;
 
   useEffect(() => {
-        getCountries()
-          .then(setCountries)
+        getStates()
+          .then(setStates)
           .catch(console.error);
       },[]);
     
@@ -27,12 +27,12 @@ export default function StateModal ({ show, onClose, onSubmit, initialValues = {
     e.preventDefault();
     const form = formRef.current;
     if (form.checkValidity()) {
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-      if (initialValues.id) {
-        data.id = initialValues.id;
-      }
-      onSubmit(data);
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        if (initialValues.id) {
+            data.id = initialValues.id;
+        }
+        onSubmit(data);
     }
     else {
         alert('Todos los campos son obligatorios');
@@ -44,14 +44,15 @@ export default function StateModal ({ show, onClose, onSubmit, initialValues = {
     <Modal show={show} onClose={onClose}>
       <form ref={formRef} onSubmit={handleSubmit}>
         <Modal.Header onClose={onClose}>
-          <Modal.Title>{isEdit ? "Edit" : "Create"} State</Modal.Title>
+          <Modal.Title>{isEdit ? "Edit" : "Create"} City</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <input name="name" placeholder="Name" />
-          <select name="countryId" value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
-            <option value="">Select Country</option>
-            {countries.map(c => (
-              <option key={c.id} value={c.id}>{c.name}</option>
+          <input name="timeZone" placeholder="Time Zone" />
+          <select name="stateId" value={selectedState} onChange={(e) => setSelectedState(e.target.value)}>
+            <option value="">Select State</option>
+            {states.map(s => (
+              <option key={s.id} value={s.id}>{s.name}</option>
             ))}
           </select>
         </Modal.Body>

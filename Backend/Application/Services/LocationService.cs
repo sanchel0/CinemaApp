@@ -118,20 +118,32 @@ namespace Application.Services
         public async Task<IEnumerable<CityDto>> GetAllCitiesAsync()
         {
             var cities = await _repository.GetAllCitiesAsync();
-            return cities.Select(c => new CityDto { Id = c.Id, Name = c.Name, StateId = c.StateId });
+            return cities.Select(c => new CityDto { Id = c.Id, Name = c.Name, TimeZone = c.TimeZone, StateId = c.StateId });
+        }
+
+        public async Task<IEnumerable<CityDto>> GetCitiesByStateIdAsync(int stateId)
+        {
+            var cities = await _repository.GetCitiesByStateIdAsync(stateId);
+            return cities.Select(c => new CityDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                TimeZone = c.TimeZone,
+                StateId = c.StateId
+            });
         }
 
         public async Task<CityDto?> GetCityByIdAsync(int id)
         {
             var city = await _repository.GetCityByIdAsync(id);
-            return city == null ? null : new CityDto { Id = city.Id, Name = city.Name, StateId = city.StateId };
+            return city == null ? null : new CityDto { Id = city.Id, Name = city.Name, TimeZone = city.TimeZone, StateId = city.StateId };
         }
 
         public async Task<CityDto> CreateCityAsync(CityDto dto)
         {
-            var city = new City { Name = dto.Name, StateId = dto.StateId };
+            var city = new City { Name = dto.Name, TimeZone = dto.TimeZone, StateId = dto.StateId };
             var result = await _repository.AddCityAsync(city);
-            return new CityDto { Id = result.Id, Name = result.Name, StateId = result.StateId };
+            return new CityDto { Id = result.Id, Name = result.Name, TimeZone = result.TimeZone, StateId = result.StateId };
         }
 
         public async Task<CityDto?> UpdateCityAsync(CityDto dto)
@@ -140,9 +152,10 @@ namespace Application.Services
             if (existing == null) return null;
 
             existing.Name = dto.Name;
+            existing.TimeZone = dto.TimeZone;
             existing.StateId = dto.StateId;
             var result = await _repository.UpdateCityAsync(existing);
-            return new CityDto { Id = result.Id, Name = result.Name, StateId = result.StateId };
+            return new CityDto { Id = result.Id, Name = result.Name, TimeZone = result.TimeZone, StateId = result.StateId };
         }
 
         public async Task<bool> DeleteCityAsync(int id)

@@ -1,23 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
-import { getStatesByCountryId } from '../../services/locations/states';
+import { getStatesByCountryId, deleteState } from '../../services/locations/states';
+import CitiesList from './CitiesList';
+import useEntityList from '../../hooks/useEntityList';
 
 const StatesList = ({ country, openModal }) => {
-    const [states, setStates] = useState([]);
-    const [selectedStateId, setSelectedStateId] = useState(null);
-
-    useEffect(() => {
-      getStatesByCountryId(country.id)
-        .then(setStates)
-        .catch(console.error);
-    },[]);
-
-    const handleViewCities = (stateId) => {
-      setSelectedStateId(stateId);
-    };
-
+    const { items: states, selected: selectedState, setSelected: setSelectedState, refresh: handleRefresh, handleDelete } = useEntityList({
+    fetchList: getStatesByCountryId,
+    deleteItem: deleteState,
+    fetchId: country.id,
+  });
+  
     return(
         <>
-            <h2>{country.name[0].toUpperCase() + country.name.slice(1)} country's states</h2>
+            <h2>States of {country.name[0].toUpperCase() + country.name.slice(1)}</h2>
             
             <table>
                 <thead>
@@ -31,18 +25,23 @@ const StatesList = ({ country, openModal }) => {
                     <tr key={s.id}>
                     <td>{s.name}</td>
                     <td>
-                        <button onClick={() => openModal('state', {...s})}>Edit</button>
-                        <button onClick={() => handleViewCities(s.id)}>View States</button>
+                        <button onClick={() => openModal('state', {...s}, handleRefresh)}>Edit</button>
+                         <button onClick={() => handleDelete(s)}>Delete</button>
+                        <button onClick={() => setSelectedState(s)}>View Cities</button>
                     </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
 
-            <button onClick={() => openModal('state')}>Create State</button>
-            {/*selectedCountryId && (
-                <StateList countryId={selectedCountryId} />
-            )*/}
+            <button onClick={() => openModal('state', {countryId: country.id}, handleRefresh)}>Create State</button>
+
+            {selectedState && (
+                <CitiesList 
+                    state={selectedState}
+                    openModal={openModal} 
+                />
+            )}
         </>
     )
 }

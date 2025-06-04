@@ -10,6 +10,8 @@ namespace Application.DTOs.Location
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
+        public string TimeZone { get; set; } = null!;
         public int StateId { get; set; }
+        
     }
 }
